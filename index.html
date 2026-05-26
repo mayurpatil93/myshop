@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shop — Powered by Ship2MyID</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --brand: #2563eb; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+               background: #f8fafc; color: #1e293b; }
+
+        /* Header */
+        header { background: white; border-bottom: 1px solid #e2e8f0;
+                 position: sticky; top: 0; z-index: 100;
+                 box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px;
+                        height: 64px; display: flex; align-items: center; gap: 32px; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--brand); text-decoration: none; }
+        .logo span { color: #1e293b; }
+        nav { display: flex; gap: 20px; flex: 1; }
+        nav a { color: #64748b; text-decoration: none; font-size: 15px; font-weight: 500; }
+        nav a:hover { color: var(--brand); }
+        .header-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+        .cart-btn { position: relative; background: none; border: 1px solid #e2e8f0;
+                    border-radius: 8px; padding: 8px 14px; cursor: pointer;
+                    font-size: 18px; display: flex; align-items: center; gap: 6px;
+                    color: #475569; }
+        .cart-btn:hover { border-color: var(--brand); }
+        .cart-count { position: absolute; top: -6px; right: -6px;
+                      background: var(--brand); color: white; border-radius: 50%;
+                      width: 18px; height: 18px; font-size: 10px; font-weight: 700;
+                      display: flex; align-items: center; justify-content: center; }
+        .signin-btn { background: var(--brand); color: white; padding: 9px 20px;
+                      border-radius: 8px; font-size: 14px; font-weight: 600;
+                      display: flex; align-items: center; gap: 8px;
+                      border: none; cursor: pointer; transition: opacity 0.2s; }
+        .signin-btn:hover { opacity: 0.9; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #2563eb 100%);
+                padding: 80px 24px; text-align: center; color: white; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px;
+                   text-shadow: 0 2px 16px rgba(0,0,0,0.2); }
+        .hero p { font-size: 20px; opacity: 0.9; margin-bottom: 36px; }
+        .hero-cta { display: inline-flex; align-items: center; gap: 10px;
+                    background: white; color: var(--brand); padding: 14px 32px;
+                    border-radius: 10px; font-size: 16px; font-weight: 700;
+                    text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+        /* Products */
+        .section { max-width: 1200px; margin: 56px auto; padding: 0 24px; }
+        .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+        .section-sub { color: #64748b; margin-bottom: 32px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+        .product-card { background: white; border-radius: 16px; padding: 24px;
+                        border: 1px solid #e2e8f0; display: flex; flex-direction: column;
+                        gap: 8px; transition: transform 0.2s, box-shadow 0.2s; }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+        .product-emoji { font-size: 48px; margin-bottom: 4px; }
+        .product-category { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+                            color: var(--brand); font-weight: 600; }
+        .product-name { font-size: 17px; font-weight: 700; }
+        .product-desc { font-size: 13px; color: #64748b; flex: 1; }
+        .product-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+        .product-price { font-size: 20px; font-weight: 700; color: var(--brand); }
+        .add-btn { background: var(--brand); color: white; border: none; padding: 8px 16px;
+                   border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .add-btn:hover { opacity: 0.85; }
+
+        /* Sign-in banner */
+        .signin-banner { background: linear-gradient(135deg, #eff6ff, #dbeafe);
+                         border: 1px solid #bfdbfe; border-radius: 16px; padding: 32px;
+                         text-align: center; margin-top: 48px; }
+        .signin-banner h2 { font-size: 22px; margin-bottom: 8px; color: #1e40af; }
+        .signin-banner p { color: #3b82f6; margin-bottom: 24px; }
+        .big-btn { display: inline-flex; align-items: center; gap: 12px;
+                   background: var(--brand); color: white; padding: 14px 36px;
+                   border-radius: 10px; font-size: 17px; font-weight: 700;
+                   border: none; cursor: pointer; box-shadow: 0 4px 16px #2563eb44; }
+        .big-btn:hover { opacity: 0.9; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; inset: 0; z-index: 500;
+                         background: rgba(15,23,42,0.6); backdrop-filter: blur(4px);
+                         align-items: center; justify-content: center; }
+        .modal-overlay.open { display: flex; }
+        .modal-box { background: white; border-radius: 20px; padding: 40px 36px;
+                     width: 100%; max-width: 400px; margin: 16px;
+                     box-shadow: 0 24px 64px rgba(0,0,0,0.2); position: relative;
+                     animation: slideUp 0.25s ease; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close { position: absolute; top: 16px; right: 16px; background: #f1f5f9;
+                       border: none; border-radius: 50%; width: 32px; height: 32px;
+                       font-size: 18px; cursor: pointer; display: flex; align-items: center;
+                       justify-content: center; color: #64748b; }
+        .modal-close:hover { background: #e2e8f0; }
+        .modal-header { text-align: center; margin-bottom: 28px; }
+        .modal-icon { font-size: 40px; margin-bottom: 12px; }
+        .modal-header h2 { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+        .modal-header p { font-size: 14px; color: #64748b; }
+        .auth-btn { width: 100%; display: flex; align-items: center; justify-content: center;
+                    gap: 12px; padding: 13px 20px; border-radius: 10px; font-size: 15px;
+                    font-weight: 600; cursor: pointer; text-decoration: none;
+                    transition: all 0.2s; border: none; }
+        .google-btn { background: white; color: #1e293b; border: 1.5px solid #e2e8f0; }
+        .google-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+        .ship2myid-btn { background: var(--brand); color: white; box-shadow: 0 4px 14px #2563eb44; }
+        .ship2myid-btn:hover { opacity: 0.92; }
+        .auth-divider { display: flex; align-items: center; gap: 12px;
+                        margin: 16px 0; color: #94a3b8; font-size: 13px; }
+        .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-top: 1px solid #e2e8f0; }
+        .google-note { margin-top: 10px; font-size: 12px; color: #94a3b8;
+                       text-align: center; display: none; }
+
+        /* Toast */
+        #toast { position: fixed; bottom: 24px; right: 24px; background: #1e293b; color: white;
+                 border-radius: 10px; padding: 12px 20px; font-size: 14px; font-weight: 500;
+                 opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s;
+                 pointer-events: none; }
+        #toast.show { opacity: 1; transform: translateY(0); }
+
+        /* Footer */
+        footer { background: #0f172a; color: #64748b; text-align: center;
+                 padding: 32px 24px; margin-top: 80px; font-size: 13px; }
+        footer a { color: #94a3b8; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo">🛒 My<span>Shop</span></a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+        </nav>
+        <div class="header-actions">
+            <button class="cart-btn" onclick="viewCart()">
+                🛒 Cart <span class="cart-count" id="cart-count">0</span>
+            </button>
+            <button class="signin-btn" onclick="openModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                </svg>
+                Sign In
+            </button>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>My Shop</h1>
+    <p>Premium products, delivered to your door</p>
+    <a href="#products" class="hero-cta">🛍️ Shop Now</a>
+</section>
+
+<section class="section" id="products">
+    <div class="section-title">Featured Products</div>
+    <div class="section-sub">Top picks this week — sign in to auto-fill your checkout</div>
+    <div class="product-grid" id="product-grid"></div>
+
+    <div class="signin-banner" id="about">
+        <h2>Checkout in seconds with Ship2MyID</h2>
+        <p>Sign in once — your name &amp; shipping address are filled automatically.</p>
+        <button class="big-btn" onclick="openModal()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            Sign In
+        </button>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 My Shop &nbsp;·&nbsp; Powered by <a href="https://ship2myid.com" target="_blank">Ship2MyID</a></p>
+</footer>
+
+<!-- Auth Modal -->
+<div id="auth-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-header">
+            <div class="modal-icon">🛒</div>
+            <h2>Sign in to My Shop</h2>
+            <p>Choose how you'd like to continue</p>
+        </div>
+
+        <button class="auth-btn google-btn" onclick="googleDummy()">
+            <svg width="20" height="20" viewBox="0 0 48 48">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            Continue with Google
+        </button>
+        <p class="google-note" id="google-note">Google sign-in is not configured for this demo.</p>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <button class="auth-btn ship2myid-btn" onclick="loginWithShip2MyID()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+            </svg>
+            Continue with Ship2MyID
+        </button>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+    // ── Config ── update redirectUri when deploying
+    const CONFIG = {
+        clientId:     'post_c372252c82db46f0',
+        clientSecret: 'f00a36f897f44e5d99c9aa802e50272f5d15a81ed19b4123',
+        redirectUri: window.location.origin + '/callback.html',//'http://localhost:3000/callback/my-shop',// window.location.origin + '/callback.html',
+        scopes:       'openid profile phone address',
+        authServer:   'https://azure-dev.ship2myid.com/auth-server',
+    };
+
+    // ── Products ──
+    const PRODUCTS = [
+        { id:1, name:'Wireless Headphones', price:79.99,  emoji:'🎧', category:'Electronics',  desc:'Hi-fi stereo, 30 h battery' },
+        { id:2, name:'Running Sneakers',    price:49.99,  emoji:'👟', category:'Footwear',      desc:'Lightweight & breathable' },
+        { id:3, name:'Coffee Maker Pro',    price:39.99,  emoji:'☕', category:'Kitchen',       desc:'Brew the perfect cup' },
+        { id:4, name:'Smart Watch',         price:129.99, emoji:'⌚', category:'Electronics',  desc:'Health & fitness tracking' },
+        { id:5, name:'Yoga Mat',            price:24.99,  emoji:'🧘', category:'Sports',        desc:'Non-slip, eco-friendly' },
+        { id:6, name:'Laptop Backpack',     price:54.99,  emoji:'🎒', category:'Accessories',  desc:'Fits 15″ laptop, USB port' },
+    ];
+
+    const grid = document.getElementById('product-grid');
+    PRODUCTS.forEach(p => {
+        grid.innerHTML += `
+        <div class="product-card">
+            <div class="product-emoji">${p.emoji}</div>
+            <div class="product-category">${p.category}</div>
+            <div class="product-name">${p.name}</div>
+            <div class="product-desc">${p.desc}</div>
+            <div class="product-footer">
+                <span class="product-price">$${p.price.toFixed(2)}</span>
+                <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+            </div>
+        </div>`;
+    });
+
+    // ── Cart ──
+    let cart = [];
+    function addToCart(id) {
+        const p = PRODUCTS.find(x => x.id === id);
+        if (!p) return;
+        cart.push(p);
+        document.getElementById('cart-count').textContent = cart.length;
+        showToast(p.emoji + ' ' + p.name + ' added to cart');
+    }
+    function viewCart() {
+        if (!cart.length) { showToast('Your cart is empty'); return; }
+        const total = cart.reduce((s, p) => s + p.price, 0).toFixed(2);
+        showToast('Cart: ' + cart.length + ' item(s) — $' + total + ' (Sign in to checkout)');
+    }
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ── Modal ──
+    function openModal() { document.getElementById('auth-modal').classList.add('open'); }
+    function closeModal() { document.getElementById('auth-modal').classList.remove('open'); }
+    function closeModalOnOverlay(e) { if (e.target.id === 'auth-modal') closeModal(); }
+    function googleDummy() { document.getElementById('google-note').style.display = 'block'; }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ── PKCE helpers ──
+    function b64url(buffer) {
+        const bytes = buffer instanceof ArrayBuffer ? new Uint8Array(buffer) : buffer;
+        let s = '';
+        bytes.forEach(b => s += String.fromCharCode(b));
+        return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+    }
+    function randomBytes() {
+        const a = new Uint8Array(32);
+        crypto.getRandomValues(a);
+        return b64url(a);
+    }
+
+    // ── Ship2MyID OAuth (PKCE) ──
+    async function loginWithShip2MyID() {
+        const codeVerifier  = randomBytes();
+        const digest        = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier));
+        const codeChallenge = b64url(digest);
+        const state         = randomBytes();
+
+        sessionStorage.setItem('pkce_verifier', codeVerifier);
+        sessionStorage.setItem('pkce_state',    state);
+
+        const params = new URLSearchParams({
+            response_type:         'code',
+            client_id:             CONFIG.clientId,
+            redirect_uri:          CONFIG.redirectUri,
+            scope:                 CONFIG.scopes,
+            state,
+            code_challenge:        codeChallenge,
+            code_challenge_method: 'S256',
+        });
+
+        window.location.href = `${CONFIG.authServer}/oauth/authorize?${params}`;
+    }
+</script>
+</body>
+</html>

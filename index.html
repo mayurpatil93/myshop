@@ -10,7 +10,7 @@
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                background: #f8fafc; color: #1e293b; }
 
-        /* Header */
+        /* ── Header ── */
         header { background: white; border-bottom: 1px solid #e2e8f0;
                  position: sticky; top: 0; z-index: 100;
                  box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
@@ -24,20 +24,21 @@
         .header-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
         .cart-btn { position: relative; background: none; border: 1px solid #e2e8f0;
                     border-radius: 8px; padding: 8px 14px; cursor: pointer;
-                    font-size: 18px; display: flex; align-items: center; gap: 6px;
-                    color: #475569; }
+                    font-size: 18px; display: flex; align-items: center; gap: 6px; color: #475569; }
         .cart-btn:hover { border-color: var(--brand); }
-        .cart-count { position: absolute; top: -6px; right: -6px;
-                      background: var(--brand); color: white; border-radius: 50%;
-                      width: 18px; height: 18px; font-size: 10px; font-weight: 700;
-                      display: flex; align-items: center; justify-content: center; }
+        .cart-count { position: absolute; top: -6px; right: -6px; background: var(--brand);
+                      color: white; border-radius: 50%; width: 18px; height: 18px;
+                      font-size: 10px; font-weight: 700; display: flex;
+                      align-items: center; justify-content: center; }
         .signin-btn { background: var(--brand); color: white; padding: 9px 20px;
                       border-radius: 8px; font-size: 14px; font-weight: 600;
                       display: flex; align-items: center; gap: 8px;
                       border: none; cursor: pointer; transition: opacity 0.2s; }
         .signin-btn:hover { opacity: 0.9; }
+        .back-link { color: #64748b; font-size: 14px; text-decoration: none; margin-left: auto; }
+        .back-link:hover { color: var(--brand); }
 
-        /* Hero */
+        /* ── Hero ── */
         .hero { background: linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #2563eb 100%);
                 padding: 80px 24px; text-align: center; color: white; }
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px;
@@ -48,7 +49,7 @@
                     border-radius: 10px; font-size: 16px; font-weight: 700;
                     text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 
-        /* Products */
+        /* ── Products ── */
         .section { max-width: 1200px; margin: 56px auto; padding: 0 24px; }
         .section-title { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
         .section-sub { color: #64748b; margin-bottom: 32px; }
@@ -68,19 +69,18 @@
                    border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
         .add-btn:hover { opacity: 0.85; }
 
-        /* Sign-in banner */
+        /* ── Sign-in banner ── */
         .signin-banner { background: linear-gradient(135deg, #eff6ff, #dbeafe);
                          border: 1px solid #bfdbfe; border-radius: 16px; padding: 32px;
                          text-align: center; margin-top: 48px; }
         .signin-banner h2 { font-size: 22px; margin-bottom: 8px; color: #1e40af; }
         .signin-banner p { color: #3b82f6; margin-bottom: 24px; }
-        .big-btn { display: inline-flex; align-items: center; gap: 12px;
-                   background: var(--brand); color: white; padding: 14px 36px;
-                   border-radius: 10px; font-size: 17px; font-weight: 700;
-                   border: none; cursor: pointer; box-shadow: 0 4px 16px #2563eb44; }
+        .big-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--brand);
+                   color: white; padding: 14px 36px; border-radius: 10px; font-size: 17px;
+                   font-weight: 700; border: none; cursor: pointer; box-shadow: 0 4px 16px #2563eb44; }
         .big-btn:hover { opacity: 0.9; }
 
-        /* Modal */
+        /* ── Auth Modal ── */
         .modal-overlay { display: none; position: fixed; inset: 0; z-index: 500;
                          background: rgba(15,23,42,0.6); backdrop-filter: blur(4px);
                          align-items: center; justify-content: center; }
@@ -113,17 +113,74 @@
         .auth-divider { display: flex; align-items: center; gap: 12px;
                         margin: 16px 0; color: #94a3b8; font-size: 13px; }
         .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-top: 1px solid #e2e8f0; }
-        .google-note { margin-top: 10px; font-size: 12px; color: #94a3b8;
-                       text-align: center; display: none; }
+        .google-note { margin-top: 10px; font-size: 12px; color: #94a3b8; text-align: center; display: none; }
 
-        /* Toast */
+        /* ── Loading ── */
+        #loading { display: none; flex-direction: column; align-items: center;
+                   justify-content: center; min-height: 60vh; gap: 16px; }
+        .spinner { width: 48px; height: 48px; border: 4px solid #e2e8f0;
+                   border-top-color: var(--brand); border-radius: 50%;
+                   animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        #loading p { color: #64748b; font-size: 16px; }
+
+        /* ── Error ── */
+        #error-view { display: none; max-width: 480px; margin: 60px auto; padding: 0 24px; }
+        .error-card { background: #fef2f2; border: 1px solid #fecaca; border-radius: 16px;
+                      padding: 32px; text-align: center; }
+        .error-card h2 { color: #dc2626; margin-bottom: 12px; }
+        .error-card p { color: #64748b; margin-bottom: 24px; font-size: 14px; }
+        .btn-back { display: inline-block; background: var(--brand); color: white;
+                    padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+
+        /* ── Checkout ── */
+        #checkout-view { display: none; max-width: 960px; margin: 40px auto; padding: 0 24px; }
+        .page-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; }
+        @media (max-width: 700px) { .page-grid { grid-template-columns: 1fr; } }
+        .card { background: white; border-radius: 16px; padding: 28px;
+                border: 1px solid #e2e8f0; margin-bottom: 24px; }
+        .card h2 { font-size: 19px; font-weight: 700; margin-bottom: 20px;
+                   padding-bottom: 14px; border-bottom: 1px solid #f1f5f9; }
+        .autofill-badge { display: inline-flex; align-items: center; gap: 6px;
+                          background: #dcfce7; color: #166534; border-radius: 20px;
+                          padding: 4px 12px; font-size: 12px; font-weight: 600; margin-bottom: 20px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .field { display: flex; flex-direction: column; gap: 4px; }
+        .field.full { grid-column: 1 / -1; }
+        .field label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+                       color: #94a3b8; font-weight: 600; }
+        .field-val { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px;
+                     padding: 10px 14px; font-size: 15px; font-weight: 500; }
+        .user-pill { display: flex; align-items: center; gap: 10px; background: #eff6ff;
+                     border-radius: 12px; padding: 10px 16px; margin-bottom: 20px; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--brand);
+                  color: white; display: flex; align-items: center; justify-content: center;
+                  font-size: 16px; font-weight: 700; flex-shrink: 0; }
+        .user-name-display { font-weight: 600; }
+        .user-sub-text { font-size: 12px; color: #64748b; }
+        .order-row { display: flex; justify-content: space-between; font-size: 15px;
+                     padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
+        .order-meta { font-size: 13px; color: #64748b; margin: 4px 0; }
+        .order-total { display: flex; justify-content: space-between; font-size: 18px;
+                       font-weight: 700; padding-top: 16px; border-top: 2px solid #e2e8f0;
+                       margin-top: 8px; color: var(--brand); }
+        .place-btn { width: 100%; padding: 16px; border: none; border-radius: 10px;
+                     background: var(--brand); color: white; font-size: 17px;
+                     font-weight: 700; cursor: pointer; margin-top: 20px;
+                     box-shadow: 0 4px 16px #2563eb44; }
+        .place-btn:hover { opacity: 0.9; }
+        details summary { cursor: pointer; color: var(--brand); font-weight: 600; font-size: 13px; }
+        pre { margin-top: 12px; background: #f1f5f9; padding: 14px; border-radius: 8px;
+              overflow-x: auto; font-size: 11px; line-height: 1.6; }
+
+        /* ── Toast ── */
         #toast { position: fixed; bottom: 24px; right: 24px; background: #1e293b; color: white;
                  border-radius: 10px; padding: 12px 20px; font-size: 14px; font-weight: 500;
                  opacity: 0; transform: translateY(12px); transition: opacity 0.3s, transform 0.3s;
                  pointer-events: none; }
         #toast.show { opacity: 1; transform: translateY(0); }
 
-        /* Footer */
+        /* ── Footer ── */
         footer { background: #0f172a; color: #64748b; text-align: center;
                  padding: 32px 24px; margin-top: 80px; font-size: 13px; }
         footer a { color: #94a3b8; text-decoration: none; }
@@ -131,15 +188,18 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════════
+     HEADER — store nav shown by default;
+     switched to simple logo + back-link in callback mode
+════════════════════════════════════════════════════════ -->
 <header>
-    <div class="header-inner">
+    <div class="header-inner" id="header-inner">
         <a href="index.html" class="logo">🛒 My<span>Shop</span></a>
-        <nav>
-            <a href="index.html">Home</a>
+        <nav id="store-nav">
             <a href="#products">Products</a>
             <a href="#about">About</a>
         </nav>
-        <div class="header-actions">
+        <div class="header-actions" id="store-actions">
             <button class="cart-btn" onclick="viewCart()">
                 🛒 Cart <span class="cart-count" id="cart-count">0</span>
             </button>
@@ -151,36 +211,102 @@
                 Sign In
             </button>
         </div>
+        <a href="index.html" class="back-link" id="back-link" style="display:none">← Continue Shopping</a>
     </div>
 </header>
 
-<section class="hero">
-    <h1>My Shop</h1>
-    <p>Premium products, delivered to your door</p>
-    <a href="#products" class="hero-cta">🛍️ Shop Now</a>
-</section>
+<!-- ═══════════════════════════════════════════════════════
+     STORE VIEW (default)
+════════════════════════════════════════════════════════ -->
+<div id="store-view">
+    <section class="hero">
+        <h1>My Shop</h1>
+        <p>Premium products, delivered to your door</p>
+        <a href="#products" class="hero-cta">🛍️ Shop Now</a>
+    </section>
 
-<section class="section" id="products">
-    <div class="section-title">Featured Products</div>
-    <div class="section-sub">Top picks this week — sign in to auto-fill your checkout</div>
-    <div class="product-grid" id="product-grid"></div>
+    <section class="section" id="products">
+        <div class="section-title">Featured Products</div>
+        <div class="section-sub">Top picks this week — sign in to auto-fill your checkout</div>
+        <div class="product-grid" id="product-grid"></div>
 
-    <div class="signin-banner" id="about">
-        <h2>Checkout in seconds with Ship2MyID</h2>
-        <p>Sign in once — your name &amp; shipping address are filled automatically.</p>
-        <button class="big-btn" onclick="openModal()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-            </svg>
-            Sign In
-        </button>
+        <div class="signin-banner" id="about">
+            <h2>Checkout in seconds with Ship2MyID</h2>
+            <p>Sign in once — your name &amp; shipping address are filled automatically.</p>
+            <button class="big-btn" onclick="openModal()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                </svg>
+                Sign In
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My Shop &nbsp;·&nbsp; Powered by <a href="https://ship2myid.com" target="_blank">Ship2MyID</a></p>
+    </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     CALLBACK VIEWS (hidden until OAuth returns)
+════════════════════════════════════════════════════════ -->
+<div id="loading">
+    <div class="spinner"></div>
+    <p>Signing you in…</p>
+</div>
+
+<div id="error-view">
+    <div class="error-card">
+        <h2>Sign-in failed</h2>
+        <p id="error-msg">Something went wrong. Please try again.</p>
+        <a href="index.html" class="btn-back">Back to Store</a>
     </div>
-</section>
+</div>
 
-<footer>
-    <p>&copy; 2025 My Shop &nbsp;·&nbsp; Powered by <a href="https://ship2myid.com" target="_blank">Ship2MyID</a></p>
-</footer>
+<div id="checkout-view">
+    <div class="page-grid">
+        <div>
+            <div class="card">
+                <h2>Contact Information</h2>
+                <div class="user-pill">
+                    <div class="avatar" id="avatar">?</div>
+                    <div>
+                        <div class="user-name-display" id="user-name">—</div>
+                        <div class="user-sub-text">Authenticated via Ship2MyID</div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="field" id="f-name"></div>
+                    <div class="field" id="f-email"></div>
+                    <div class="field" id="f-phone"></div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Shipping Address</h2>
+                <div class="autofill-badge">✓ Auto-filled from Ship2MyID</div>
+                <div class="form-grid" id="address-grid"></div>
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <h2>Order Summary</h2>
+                <div class="order-row"><span>🎧 Wireless Headphones × 1</span><span>$79.99</span></div>
+                <div class="order-row"><span>⌚ Smart Watch × 1</span><span>$129.99</span></div>
+                <div class="order-meta" style="margin-top:12px;">Subtotal: $209.98</div>
+                <div class="order-meta">Shipping: $9.99</div>
+                <div class="order-total"><span>Total</span><span>$219.97</span></div>
+                <button class="place-btn" onclick="alert('Demo order placed! ✅')">Place Order — $219.97</button>
+            </div>
+            <div class="card">
+                <details>
+                    <summary>Raw UserInfo from Ship2MyID API</summary>
+                    <pre id="raw-userinfo"></pre>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Auth Modal -->
 <div id="auth-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
@@ -191,7 +317,6 @@
             <h2>Sign in to My Shop</h2>
             <p>Choose how you'd like to continue</p>
         </div>
-
         <button class="auth-btn google-btn" onclick="googleDummy()">
             <svg width="20" height="20" viewBox="0 0 48 48">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -202,9 +327,7 @@
             Continue with Google
         </button>
         <p class="google-note" id="google-note">Google sign-in is not configured for this demo.</p>
-
         <div class="auth-divider"><span>or</span></div>
-
         <button class="auth-btn ship2myid-btn" onclick="loginWithShip2MyID()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
@@ -219,16 +342,32 @@
 <div id="toast"></div>
 
 <script>
-    // ── Config ── update redirectUri when deploying
+    // ── Config ──────────────────────────────────────────────────────────
     const CONFIG = {
         clientId:     'post_c372252c82db46f0',
         clientSecret: 'f00a36f897f44e5d99c9aa802e50272f5d15a81ed19b4123',
-        redirectUri: window.location.origin + '/callback.html',//'http://localhost:3000/callback/my-shop',// window.location.origin + '/callback.html',
+        // redirectUri points back to this same file (strips query string)
+        redirectUri:  window.location.href.split('?')[0].split('#')[0],
         scopes:       'openid profile phone address',
         authServer:   'https://azure-dev.ship2myid.com/auth-server',
     };
 
-    // ── Products ──
+    // ── Router — decide store vs callback on page load ───────────────────
+    (function router() {
+        const p = new URLSearchParams(window.location.search);
+        if (p.get('code') || p.get('error')) {
+            // Switch to callback mode
+            document.getElementById('store-view').style.display   = 'none';
+            document.getElementById('store-nav').style.display    = 'none';
+            document.getElementById('store-actions').style.display = 'none';
+            document.getElementById('back-link').style.display    = 'block';
+            document.getElementById('loading').style.display      = 'flex';
+            handleCallback(p);
+        }
+        // else: store view already visible by default
+    })();
+
+    // ── Products ─────────────────────────────────────────────────────────
     const PRODUCTS = [
         { id:1, name:'Wireless Headphones', price:79.99,  emoji:'🎧', category:'Electronics',  desc:'Hi-fi stereo, 30 h battery' },
         { id:2, name:'Running Sneakers',    price:49.99,  emoji:'👟', category:'Footwear',      desc:'Lightweight & breathable' },
@@ -237,7 +376,6 @@
         { id:5, name:'Yoga Mat',            price:24.99,  emoji:'🧘', category:'Sports',        desc:'Non-slip, eco-friendly' },
         { id:6, name:'Laptop Backpack',     price:54.99,  emoji:'🎒', category:'Accessories',  desc:'Fits 15″ laptop, USB port' },
     ];
-
     const grid = document.getElementById('product-grid');
     PRODUCTS.forEach(p => {
         grid.innerHTML += `
@@ -253,7 +391,7 @@
         </div>`;
     });
 
-    // ── Cart ──
+    // ── Cart ─────────────────────────────────────────────────────────────
     let cart = [];
     function addToCart(id) {
         const p = PRODUCTS.find(x => x.id === id);
@@ -274,16 +412,16 @@
         setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ── Modal ──
-    function openModal() { document.getElementById('auth-modal').classList.add('open'); }
+    // ── Modal ─────────────────────────────────────────────────────────────
+    function openModal()  { document.getElementById('auth-modal').classList.add('open'); }
     function closeModal() { document.getElementById('auth-modal').classList.remove('open'); }
     function closeModalOnOverlay(e) { if (e.target.id === 'auth-modal') closeModal(); }
     function googleDummy() { document.getElementById('google-note').style.display = 'block'; }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    // ── PKCE helpers ──
-    function b64url(buffer) {
-        const bytes = buffer instanceof ArrayBuffer ? new Uint8Array(buffer) : buffer;
+    // ── PKCE helpers ──────────────────────────────────────────────────────
+    function b64url(buf) {
+        const bytes = buf instanceof ArrayBuffer ? new Uint8Array(buf) : buf;
         let s = '';
         bytes.forEach(b => s += String.fromCharCode(b));
         return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
@@ -294,7 +432,7 @@
         return b64url(a);
     }
 
-    // ── Ship2MyID OAuth (PKCE) ──
+    // ── Start OAuth login ─────────────────────────────────────────────────
     async function loginWithShip2MyID() {
         const codeVerifier  = randomBytes();
         const digest        = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier));
@@ -313,8 +451,105 @@
             code_challenge:        codeChallenge,
             code_challenge_method: 'S256',
         });
-
         window.location.href = `${CONFIG.authServer}/oauth/authorize?${params}`;
+    }
+
+    // ── Handle OAuth callback ─────────────────────────────────────────────
+    async function handleCallback(params) {
+        const code  = params.get('code');
+        const state = params.get('state');
+        const error = params.get('error');
+
+        if (error) { showError(error + ': ' + (params.get('error_description') || '')); return; }
+        if (!code || !state) { showError('Missing code or state in callback URL.'); return; }
+
+        const savedState   = sessionStorage.getItem('pkce_state');
+        const codeVerifier = sessionStorage.getItem('pkce_verifier');
+        sessionStorage.removeItem('pkce_state');
+        sessionStorage.removeItem('pkce_verifier');
+
+        if (state !== savedState) {
+            showError('State mismatch — possible CSRF or expired session. Please try again.');
+            return;
+        }
+
+        try {
+            // Exchange code for tokens
+            const tokenRes = await fetch(`${CONFIG.authServer}/oauth/token`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body:    new URLSearchParams({
+                    grant_type:    'authorization_code',
+                    code,
+                    redirect_uri:  CONFIG.redirectUri,
+                    client_id:     CONFIG.clientId,
+                    client_secret: CONFIG.clientSecret,
+                    code_verifier: codeVerifier,
+                }),
+            });
+            const tokens = await tokenRes.json();
+            if (!tokenRes.ok) throw new Error('Token exchange failed: ' + (tokens.error_description || tokens.error));
+
+            // Fetch UserInfo
+            const userRes = await fetch(`${CONFIG.authServer}/oauth/userinfo`, {
+                headers: { 'Authorization': 'Bearer ' + tokens.access_token },
+            });
+            const userInfo = await userRes.json();
+            if (!userRes.ok) throw new Error('UserInfo failed: ' + JSON.stringify(userInfo));
+
+            // Clear code from URL so refreshing doesn't re-run the flow
+            window.history.replaceState({}, '', window.location.pathname);
+
+            renderCheckout(userInfo);
+        } catch (err) {
+            showError(err.message);
+        }
+    }
+
+    // ── Render checkout ───────────────────────────────────────────────────
+    function esc(s) {
+        return s == null ? '' : String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function mkField(label, value, full) {
+        if (!value) return '';
+        return `<div class="field${full ? ' full' : ''}">
+            <label>${label}</label>
+            <div class="field-val">${esc(value)}</div>
+        </div>`;
+    }
+    function getInitials(name) {
+        if (!name) return '?';
+        return name.split(/[\s_]+/).map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    }
+
+    function renderCheckout(userInfo) {
+        document.getElementById('loading').style.display       = 'none';
+        document.getElementById('checkout-view').style.display = 'block';
+
+        const name = userInfo.name || userInfo.sub || '';
+        document.getElementById('avatar').textContent    = getInitials(name);
+        document.getElementById('user-name').textContent = name;
+
+        document.getElementById('f-name').innerHTML  = mkField('Full Name', userInfo.name);
+        document.getElementById('f-email').innerHTML = mkField('Email',     userInfo.email);
+        document.getElementById('f-phone').innerHTML = mkField('Phone',     userInfo.phone_number);
+
+        const addr = userInfo.address || {};
+        document.getElementById('address-grid').innerHTML = [
+            mkField('Street Address', addr.street_address, true),
+            mkField('City',           addr.locality),
+            mkField('State / Region', addr.region),
+            mkField('Postal Code',    addr.postal_code),
+            mkField('Country',        addr.country),
+        ].join('');
+
+        document.getElementById('raw-userinfo').textContent = JSON.stringify(userInfo, null, 2);
+    }
+
+    function showError(msg) {
+        document.getElementById('loading').style.display    = 'none';
+        document.getElementById('error-msg').textContent    = msg;
+        document.getElementById('error-view').style.display = 'block';
     }
 </script>
 </body>

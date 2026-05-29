@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shop — Powered by Ship2MyID</title>
+    <title>My Shop — Powered by PostApp</title>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root { --brand: #2563eb; }
@@ -108,8 +108,8 @@
                     transition: all 0.2s; border: none; }
         .google-btn { background: white; color: #1e293b; border: 1.5px solid #e2e8f0; }
         .google-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
-        .ship2myid-btn { background: var(--brand); color: white; box-shadow: 0 4px 14px #2563eb44; }
-        .ship2myid-btn:hover { opacity: 0.92; }
+        .postapp-btn { background: var(--brand); color: white; box-shadow: 0 4px 14px #2563eb44; }
+        .postapp-btn:hover { opacity: 0.92; }
         .auth-divider { display: flex; align-items: center; gap: 12px;
                         margin: 16px 0; color: #94a3b8; font-size: 13px; }
         .auth-divider::before, .auth-divider::after { content: ''; flex: 1; border-top: 1px solid #e2e8f0; }
@@ -259,7 +259,7 @@
                 <div class="chip-avatar" id="chip-avatar">?</div>
                 <div class="chip-info">
                     <span class="chip-name" id="chip-name">—</span>
-                    <span class="chip-sub">Signed in via Ship2MyID</span>
+                    <span class="chip-sub">Signed in via PostApp</span>
                 </div>
                 <span class="chip-caret">▼</span>
             </button>
@@ -269,7 +269,7 @@
                     <div class="pd-avatar" id="pd-avatar">?</div>
                     <div>
                         <div class="pd-name" id="pd-name">—</div>
-                        <span class="pd-badge">Ship2MyID Verified</span>
+                        <span class="pd-badge">PostApp Verified</span>
                     </div>
                 </div>
                 <div id="pd-rows"></div>
@@ -294,7 +294,7 @@
         <div class="product-grid" id="product-grid"></div>
 
         <div class="signin-banner" id="about">
-            <h2>Checkout in seconds with Ship2MyID</h2>
+            <h2>Checkout in seconds with PostApp</h2>
             <p>Sign in once — your name &amp; shipping address are filled automatically.</p>
             <button class="big-btn" onclick="openModal()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -307,7 +307,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 My Shop &nbsp;·&nbsp; Powered by <a href="https://ship2myid.com" target="_blank">Ship2MyID</a></p>
+        <p>&copy; 2025 My Shop &nbsp;·&nbsp; Powered by <a href="https://ship2myid.com" target="_blank">PostApp</a></p>
     </footer>
 </div>
 
@@ -336,7 +336,7 @@
                     <div class="avatar" id="avatar">?</div>
                     <div>
                         <div class="user-name-display" id="user-name">—</div>
-                        <div class="user-sub-text">Authenticated via Ship2MyID</div>
+                        <div class="user-sub-text">Authenticated via PostApp</div>
                     </div>
                 </div>
                 <div class="form-grid">
@@ -347,7 +347,7 @@
             </div>
             <div class="card">
                 <h2>Shipping Address</h2>
-                <div class="autofill-badge">✓ Auto-filled from Ship2MyID</div>
+                <div class="autofill-badge">✓ Auto-filled from PostApp</div>
                 <div class="form-grid" id="address-grid"></div>
             </div>
         </div>
@@ -363,7 +363,7 @@
             </div>
             <div class="card">
                 <details>
-                    <summary>Raw UserInfo from Ship2MyID API</summary>
+                    <summary>Raw UserInfo from PostApp API</summary>
                     <pre id="raw-userinfo"></pre>
                 </details>
             </div>
@@ -391,13 +391,13 @@
         </button>
         <p class="google-note" id="google-note">Google sign-in is not configured for this demo.</p>
         <div class="auth-divider"><span>or</span></div>
-        <button class="auth-btn ship2myid-btn" onclick="loginWithShip2MyID()">
+        <button class="auth-btn postapp-btn" onclick="loginWithPostApp()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
                 <polyline points="10 17 15 12 10 7"/>
                 <line x1="15" y1="12" x2="3" y2="12"/>
             </svg>
-            Continue with Ship2MyID
+            Continue with PostApp
         </button>
     </div>
 </div>
@@ -496,7 +496,7 @@
     }
 
     // ── Start OAuth login ─────────────────────────────────────────────────
-    async function loginWithShip2MyID() {
+    async function loginWithPostApp() {
         const codeVerifier  = randomBytes();
         const digest        = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier));
         const codeChallenge = b64url(digest);
